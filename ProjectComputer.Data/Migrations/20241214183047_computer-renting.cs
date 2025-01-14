@@ -6,6 +6,7 @@ namespace ProjectComputer.Data.Migrations
 {
     public partial class computerrenting : Migration
     {
+
         protected override void Up(MigrationBuilder migrationBuilder)
         {
 
@@ -17,3 +18,4 @@ namespace ProjectComputer.Data.Migrations
         }
     }
 }
+ 
