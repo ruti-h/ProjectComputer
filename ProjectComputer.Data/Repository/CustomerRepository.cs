@@ -16,9 +16,9 @@ namespace ProjectComputer.Data.Repository
         {
             _dataContext = dataContext;
         }
-        public bool AddCustomer( Customer customer)
+        public bool AddCustomer(Customer customer)
         {
-             _dataContext.customers.Add(customer);
+            _dataContext.customers.Add(customer);
             _dataContext.SaveChanges();
             return true;
         }
@@ -33,17 +33,17 @@ namespace ProjectComputer.Data.Repository
 
         public Customer GetById(int id)
         {
-          return  _dataContext.customers.ToList().Find(x => x.Id == id);
+            return _dataContext.customers.ToList().Find(x => x.Id == id);
         }
 
         public List<Customer> GetListCustomers()
         {
-           return _dataContext.customers.ToList();
+            return _dataContext.customers.ToList();
         }
 
         public bool Put(int id, Customer customer)
         {
-           Delete(id);
+            Delete(id);
             AddCustomer(customer);
             _dataContext.SaveChanges();
 

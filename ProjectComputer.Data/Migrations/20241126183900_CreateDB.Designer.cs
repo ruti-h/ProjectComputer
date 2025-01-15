@@ -12,8 +12,8 @@ using ProjectComputer.Data;
 namespace ProjectComputer.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241212190623_one-to-many-2")]
-    partial class onetomany2
+    [Migration("20241126183900_CreateDB")]
+    partial class CreateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,11 +92,11 @@ namespace ProjectComputer.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateRenting")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("IdCustomer")
+                        .HasColumnType("int");
 
                     b.Property<int>("IdRenting")
                         .HasColumnType("int");
@@ -106,20 +106,7 @@ namespace ProjectComputer.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
                     b.ToTable("Listrentin");
-                });
-
-            modelBuilder.Entity("ProjectComputer.Core.Entities.Renting", b =>
-                {
-                    b.HasOne("ProjectComputer.Core.Entities.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }

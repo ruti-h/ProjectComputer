@@ -4,7 +4,7 @@
 
 namespace ProjectComputer.Data.Migrations
 {
-    public partial class onetomany2 : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

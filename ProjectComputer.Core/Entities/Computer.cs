@@ -13,6 +13,8 @@ namespace ProjectComputer.Core.Entities
         public string Destination { get; set; }
         public int Price { get; set; }
         public int DorComputer { get; set; }
+        public List<Renting> Rentals { get; set; }
+
         public Computer()
         {
             

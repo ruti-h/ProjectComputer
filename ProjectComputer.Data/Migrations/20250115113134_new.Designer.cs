@@ -12,8 +12,8 @@ using ProjectComputer.Data;
 namespace ProjectComputer.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241214220513_computer-renting2")]
-    partial class computerrenting2
+    [Migration("20250115113134_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,34 +92,54 @@ namespace ProjectComputer.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateRenting")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IdRenting")
-                        .HasColumnType("int");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
+                    b.Property<int>("computerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("customerId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("computerId");
+
+                    b.HasIndex("customerId");
 
                     b.ToTable("Listrentin");
                 });
 
             modelBuilder.Entity("ProjectComputer.Core.Entities.Renting", b =>
                 {
-                    b.HasOne("ProjectComputer.Core.Entities.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
+                    b.HasOne("ProjectComputer.Core.Entities.Computer", "computer")
+                        .WithMany("Rentals")
+                        .HasForeignKey("computerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.HasOne("ProjectComputer.Core.Entities.Customer", "customer")
+                        .WithMany("Rentals")
+                        .HasForeignKey("customerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("computer");
+
+                    b.Navigation("customer");
+                });
+
+            modelBuilder.Entity("ProjectComputer.Core.Entities.Computer", b =>
+                {
+                    b.Navigation("Rentals");
+                });
+
+            modelBuilder.Entity("ProjectComputer.Core.Entities.Customer", b =>
+                {
+                    b.Navigation("Rentals");
                 });
 #pragma warning restore 612, 618
         }

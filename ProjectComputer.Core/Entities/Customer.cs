@@ -13,7 +13,9 @@ namespace ProjectComputer.Core.Entities
         public string Phone { get; set; }
         public string Email { get; set; }
         public string City { get; set; }
+       
         public string KindComputer { get; set; }
+        public List<Renting> Rentals { get; set; }
         public Customer()
         {
             
