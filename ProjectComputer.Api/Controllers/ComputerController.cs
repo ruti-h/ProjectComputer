@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjectComputer.Api.Models;
+using ProjectComputer.Core.DTO;
 using ProjectComputer.Core.Entities;
 using ProjectComputer.Core.Service;
 
@@ -26,20 +28,26 @@ namespace ProjectComputer.Api.Controllers
         [HttpGet("{id}")]
         public Computer Get(int id)
         {
-            return _computerService.GetComputerById(id);
+            
+            var user= _computerService.GetComputerById(id);
+            var userDTO=new ComputerDTO { City=user.}
         }
 
         // POST api/<ComputerController>
         [HttpPost]
-        public ActionResult<bool> Post([FromBody] Computer computer)
+        public ActionResult Post([FromBody] ComputerModel computer)
         {
-            return _computerService.AddComputer(computer);
+            var computerModel = new Computer { Company = computer.Company, Destination = computer.Destination,
+              DorComputer =computer.DorComputer, Price = computer.Price };
+            var computerModelAdd= _computerService.AddComputer(computerModel);
+            return Ok(computerModelAdd);
         }
 
         // PUT api/<ComputerController>/5
         [HttpPut("{id}")]
         public ActionResult<bool> Put(int id, [FromBody] Computer computer)
         {
+            
             return _computerService.UpdateComputer(id, computer);
         }
 

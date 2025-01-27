@@ -4,20 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectComputer.Core.Entities
+namespace ProjectComputer.Core.DTO
 {
-    public class Computer
+    public class ComputerDTO
     {
         public int Id { get; set; }
         public string Company { get; set; }
         public string Destination { get; set; }
         public int Price { get; set; }
         public int DorComputer { get; set; }
-        public List<Renting> Rentals { get; set; }
-
-        public Computer()
-        {
-            
-        }
     }
 }

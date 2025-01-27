@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectComputer.Core.Entities
+namespace ProjectComputer.Core.DTO
 {
-    public class Customer
+    public class CustomerDTO
     {
         public string Name { get; set; }
         public int Id { get; set; }
@@ -14,10 +14,5 @@ namespace ProjectComputer.Core.Entities
         public string Email { get; set; }
         public string City { get; set; }
         public string KindComputer { get; set; }
-        public List<Renting> Rentals { get; set; }
-        public Customer()
-        {
-            
-        }
     }
 }

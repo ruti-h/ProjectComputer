@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjectComputer.Api.Models;
+using ProjectComputer.Core;
+using ProjectComputer.Core.DTO;
 using ProjectComputer.Core.Entities;
 using ProjectComputer.Core.Service;
 
@@ -11,29 +14,50 @@ namespace ProjectComputer.Api.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
-        public CustomerController(ICustomerService customerServic)
+        private readonly Mapping _maping;
+        public CustomerController(ICustomerService customerServic, Mapping maping)
         {
             _customerService = customerServic;
+            _maping = maping;
         }
         // GET: api/<CustomerController>
         [HttpGet]
-        public IEnumerable<Customer> Get()
+        public ActionResult Get()
         {
-            return _customerService.GetListCustomers();
+            var list= _customerService.GetListCustomers();
+            var listDTO = new List<CustomerDTO>();
+            foreach (var customer in list)
+            {
+                listDTO.Add(_maping.MapingDto(customer));
+            }
+            return Ok(listDTO);
         }
 
         // GET api/<CustomerController>/5
         [HttpGet("{id}")]
-        public Customer Get(int id)
+        public ActionResult Get(int id)
         {
-            return _customerService.GetById(id);
+
+            var customer= _customerService.GetById(id);
+            var userDTO = _maping.MapingDto(customer);
+            return Ok(userDTO);
         }
 
         // POST api/<CustomerController>
         [HttpPost]
-        public ActionResult<bool> Post([FromBody] Customer customer)
+        public ActionResult Post([FromBody] CustomerPostModel customer)
         {
-            return _customerService.AddCustomer(customer);
+            var useModel = new Customer
+            {
+                City =customer.City,
+                Email = customer.Email,
+                KindComputer =customer.KindComputer
+            ,
+                Name = customer.Name,
+                Phone =customer.Phone
+            };
+            var CustomerService =_customerService.AddCustomer(useModel);
+            return Ok(CustomerService);
         }
 
         // PUT api/<CustomerController>/5
