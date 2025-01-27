@@ -10,7 +10,7 @@ namespace ProjectComputer.Core.Entities
     {
 
         public int Id { get; set; }
-      //  public int IdCustomer { get; set; }
+        public int IdCustomer { get; set; }
         public DateTime DateRenting { get; set; }
         public bool Status { get; set; }
         public int computerId { get; set; }
